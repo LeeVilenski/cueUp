@@ -19,14 +19,15 @@ export function useDashboardStats() {
   const { sessions, loading: sessionsLoading, refresh: refreshSessions } = useSessions();
   const { results, loading: resultsLoading, refresh: refreshResults } = useAllSessionExerciseResults();
   const { exercises, loading: exercisesLoading } = useExercises();
-  const { settings, loading: settingsLoading } = useAppSettings();
+  const { settings, loading: settingsLoading, refresh: refreshSettings } = useAppSettings();
 
   useFocusEffect(
     useCallback(() => {
       refreshBreakLogs();
       refreshSessions();
       refreshResults();
-    }, [refreshBreakLogs, refreshSessions, refreshResults]),
+      refreshSettings();
+    }, [refreshBreakLogs, refreshSessions, refreshResults, refreshSettings]),
   );
 
   const personalBests = useMemo(() => getPersonalBests(breakLogs), [breakLogs]);
