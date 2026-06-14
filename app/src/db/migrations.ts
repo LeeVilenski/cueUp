@@ -1,18 +1,11 @@
 import type { SQLiteDatabase } from 'expo-sqlite';
 
-/**
- * Hand-written, idempotent DDL mirroring src/db/schema.ts. Run once on app start.
- * Avoids a drizzle-kit migration build step for this local-only database.
- */
-const SCHEMA_SQL = `
-PRAGMA journal_mode = WAL;
-PRAGMA foreign_keys = ON;
-
-CREATE TABLE IF NOT EXISTS exercises (
+/** Shared column definitions for `exercises`, used by both the initial create and the category-migration rebuild below. */
+const EXERCISES_COLUMNS_SQL = `
   id TEXT PRIMARY KEY,
   slug TEXT UNIQUE NOT NULL,
   name TEXT NOT NULL,
-  category TEXT NOT NULL CHECK (category IN ('potting','safety','break_building','positional_play','cueing_fundamentals','match_practice')),
+  category TEXT NOT NULL CHECK (category IN ('warm_up','potting','safety','break_building','positional_play','cueing_fundamentals','match_practice')),
   description TEXT NOT NULL,
   best_practice_tips TEXT NOT NULL,
   difficulty TEXT NOT NULL CHECK (difficulty IN ('beginner','intermediate','advanced')),
@@ -26,7 +19,17 @@ CREATE TABLE IF NOT EXISTS exercises (
   remote_id TEXT,
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL
-);
+`;
+
+/**
+ * Hand-written, idempotent DDL mirroring src/db/schema.ts. Run once on app start.
+ * Avoids a drizzle-kit migration build step for this local-only database.
+ */
+const SCHEMA_SQL = `
+PRAGMA journal_mode = WAL;
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE IF NOT EXISTS exercises (${EXERCISES_COLUMNS_SQL});
 
 CREATE TABLE IF NOT EXISTS tips (
   id TEXT PRIMARY KEY,
@@ -93,4 +96,27 @@ INSERT OR IGNORE INTO app_settings (id) VALUES (1);
 
 export async function runMigrations(sqlite: SQLiteDatabase) {
   await sqlite.execAsync(SCHEMA_SQL);
+  await migrateExerciseCategoryConstraint(sqlite);
+}
+
+/**
+ * SQLite can't ALTER a CHECK constraint in place, so installs created before the
+ * 'warm_up' category existed have an `exercises` table whose CHECK clause rejects it.
+ * Rebuild the table with the current constraint, preserving existing rows and ids
+ * (so session_exercises foreign keys stay valid).
+ */
+async function migrateExerciseCategoryConstraint(sqlite: SQLiteDatabase) {
+  const table = await sqlite.getFirstAsync<{ sql: string }>(
+    `SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'exercises'`,
+  );
+  if (!table || table.sql.includes('warm_up')) return;
+
+  await sqlite.execAsync(`PRAGMA foreign_keys = OFF;`);
+  await sqlite.execAsync(`
+    CREATE TABLE exercises_new (${EXERCISES_COLUMNS_SQL});
+    INSERT INTO exercises_new SELECT * FROM exercises;
+    DROP TABLE exercises;
+    ALTER TABLE exercises_new RENAME TO exercises;
+  `);
+  await sqlite.execAsync(`PRAGMA foreign_keys = ON;`);
 }

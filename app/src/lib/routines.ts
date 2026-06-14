@@ -24,4 +24,10 @@ export const ROUTINES: Routine[] = [
     description: 'Sharpen safety play and cue-ball control around the table.',
     exerciseIds: ['the-spider-safety-routine', 'top-bottom-cushion-control', 'all-reds-safety-to-baulk'],
   },
+  {
+    id: 'warm-up',
+    name: 'Quick Warm-Up',
+    description: 'Loosen up and get a feel for the table before a session.',
+    exerciseIds: ['top-pocket-loosener', 'scatter-and-clear-15-reds', 'clear-the-colours'],
+  },
 ];

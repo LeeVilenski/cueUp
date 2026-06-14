@@ -1,6 +1,7 @@
 import { integer, real, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 export const EXERCISE_CATEGORIES = [
+  'warm_up',
   'potting',
   'safety',
   'break_building',

@@ -202,4 +202,55 @@ export const EXERCISES_SEED: NewExercise[] = [
     scoringUnit: 'balls',
     sortOrder: 11,
   }),
+  exercise({
+    slug: 'scatter-and-clear-15-reds',
+    name: 'Scatter & Clear (15 Reds)',
+    category: 'warm_up',
+    description:
+      'Scatter all 15 reds randomly around the table — no setup, just spread them out — then try to clear every one. Pick off whichever red looks easiest first and work your way through the pack.',
+    bestPracticeTips:
+      "- Don't overthink position early on — this is about loosening up, not break-building.\n" +
+      '- If a red looks too risky, leave it and come back once the table opens up.\n' +
+      '- Note how many you cleared before missing, and try to beat that number next time.',
+    difficulty: 'beginner',
+    suggestedDurationMins: 15,
+    scoringType: 'count_potted',
+    scoringTarget: 15,
+    scoringUnit: 'balls',
+    sortOrder: 12,
+  }),
+  exercise({
+    slug: 'clear-the-colours',
+    name: 'Clear the Colours',
+    category: 'warm_up',
+    description:
+      'Place all six colours on their spots and pot them in any order, re-spotting as needed. A simple way to get a feel for pace and pocket angles all over the table before a session.',
+    bestPracticeTips:
+      "- Vary the order each time so you cover pockets and angles you wouldn't normally practise.\n" +
+      '- Treat a missed colour as a re-spot and move on — the goal is rhythm, not a perfect run.\n' +
+      '- Once comfortable, time yourself and try to beat your best time.',
+    difficulty: 'beginner',
+    suggestedDurationMins: 10,
+    scoringType: 'count_potted',
+    scoringTarget: 6,
+    scoringUnit: 'colours',
+    sortOrder: 13,
+  }),
+  exercise({
+    slug: 'top-pocket-loosener',
+    name: 'Top Pocket Loosener',
+    category: 'warm_up',
+    description:
+      'Place a handful of reds near each top pocket and pot them straight in, one after another, without worrying about cue ball position. A fast way to find your stroke before getting into structured practice.',
+    bestPracticeTips:
+      '- Keep it relaxed — this is about smooth cueing, not pressure.\n' +
+      '- Notice any early misses; they often point to something to check in your stance or alignment.\n' +
+      '- A couple of minutes is enough — move on to a structured drill once you feel comfortable.',
+    difficulty: 'beginner',
+    suggestedDurationMins: 5,
+    scoringType: 'count_potted',
+    scoringTarget: 10,
+    scoringUnit: 'balls',
+    sortOrder: 14,
+  }),
 ];

@@ -39,15 +39,17 @@ export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
  * Inspired by snooker ball colours (yellow, green, brown, blue, pink, red).
  */
 export const CategoryColors: Record<string, string> = {
+  warm_up: '#D6383D',
   potting: '#B8860B',
   safety: '#1B6FE0',
   break_building: '#1B7A43',
   positional_play: '#8B5A2B',
   cueing_fundamentals: '#C2447A',
-  match_practice: '#D6383D',
+  match_practice: '#3A3A3A',
 };
 
 export const CategoryLabels: Record<string, string> = {
+  warm_up: 'Warm-up',
   potting: 'Potting',
   safety: 'Safety',
   break_building: 'Break building',
