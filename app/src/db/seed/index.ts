@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm';
 
 import type { Database } from '@/db/client';
-import { exercises, tips, type Exercise, type NewExercise } from '@/db/schema';
+import { exercises, tips, type Exercise, type NewExercise, type Tip } from '@/db/schema';
 
 import { EXERCISES_SEED } from './exercises';
 import { TIPS_SEED } from './tips';
@@ -37,11 +37,27 @@ export async function seedDatabase(db: Database) {
     }
   }
 
-  const existingTips = await db.select({ slug: tips.slug }).from(tips);
-  const existingTipSlugs = new Set(existingTips.map((row) => row.slug));
-  const missingTips = TIPS_SEED.filter((seed) => !existingTipSlugs.has(seed.slug));
+  const existingTips = await db.select().from(tips);
+  const existingTipBySlug = new Map(existingTips.map((row) => [row.slug, row]));
+
+  const missingTips = TIPS_SEED.filter((seed) => !existingTipBySlug.has(seed.slug));
   if (missingTips.length > 0) {
     await db.insert(tips).values(missingTips);
+  }
+
+  for (const seed of TIPS_SEED) {
+    const existing = existingTipBySlug.get(seed.slug);
+    if (existing && tipContentChanged(existing, seed)) {
+      await db
+        .update(tips)
+        .set({
+          title: seed.title,
+          category: seed.category,
+          body: seed.body,
+          sortOrder: seed.sortOrder,
+        })
+        .where(eq(tips.id, existing.id));
+    }
   }
 }
 
@@ -57,6 +73,16 @@ function exerciseContentChanged(existing: Exercise, seed: NewExercise): boolean 
     existing.scoringType !== seed.scoringType ||
     existing.scoringTarget !== seed.scoringTarget ||
     existing.scoringUnit !== seed.scoringUnit ||
+    existing.sortOrder !== seed.sortOrder
+  );
+}
+
+/** Detects content drift between an existing tip and the latest seed, so app updates can correct it. */
+function tipContentChanged(existing: Tip, seed: Tip): boolean {
+  return (
+    existing.title !== seed.title ||
+    existing.category !== seed.category ||
+    existing.body !== seed.body ||
     existing.sortOrder !== seed.sortOrder
   );
 }

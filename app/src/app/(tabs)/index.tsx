@@ -21,8 +21,17 @@ export default function HomeScreen() {
   const theme = useTheme();
   const [startingSuggested, setStartingSuggested] = useState(false);
 
-  const { sessions, activeSession, personalBests, streaks, weeklyCount, weeklyGoal, exerciseNameById, suggestedRoutine } =
-    useDashboardStats();
+  const {
+    sessions,
+    activeSession,
+    personalBests,
+    streaks,
+    weeklyCount,
+    weeklyGoal,
+    exerciseNameById,
+    suggestedRoutine,
+    settings,
+  } = useDashboardStats();
 
   const handleStartSuggested = async () => {
     setStartingSuggested(true);
@@ -35,7 +44,7 @@ export default function HomeScreen() {
   return (
     <ThemedView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
-        <ThemedText type="title">Snooker Coach</ThemedText>
+        <ThemedText type="title">{settings?.playerName ? `Hi, ${settings.playerName}` : 'CueUp'}</ThemedText>
 
         {activeSession ? (
           <Card style={styles.resumeCard}>

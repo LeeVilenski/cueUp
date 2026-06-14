@@ -33,11 +33,12 @@ export function useDashboardStats() {
   const personalBests = useMemo(() => getPersonalBests(breakLogs), [breakLogs]);
   const rollingAverage = useMemo(() => getRollingAverage(breakLogs), [breakLogs]);
   const breakTrend = useMemo(() => getBreakTrend(breakLogs), [breakLogs]);
-  const streaks = useMemo(() => getSessionStreaks(sessions), [sessions]);
+  const streaks = useMemo(() => getSessionStreaks(sessions, breakLogs), [sessions, breakLogs]);
   const weeklyCount = useMemo(() => getWeeklySessionCount(sessions), [sessions]);
   const totalMinutes = useMemo(() => getTotalPracticeMinutes(sessions), [sessions]);
-  const coverage = useMemo(() => getCategoryCoverage(results, COVERAGE_WINDOW_DAYS), [results]);
-  const neglected = useMemo(() => getNeglectedCategories(coverage), [coverage]);
+  const coverage = useMemo(() => getCategoryCoverage(results), [results]);
+  const recentCoverage = useMemo(() => getCategoryCoverage(results, COVERAGE_WINDOW_DAYS), [results]);
+  const neglected = useMemo(() => getNeglectedCategories(recentCoverage), [recentCoverage]);
   const weakAreas = useMemo(() => getWeakAreas(results), [results]);
 
   const exerciseNameById = useMemo(() => {
@@ -53,8 +54,8 @@ export function useDashboardStats() {
   }, [exercises]);
 
   const suggestedRoutine = useMemo(
-    () => suggestRoutine(coverage, exerciseCategoryById),
-    [coverage, exerciseCategoryById],
+    () => suggestRoutine(recentCoverage, exerciseCategoryById),
+    [recentCoverage, exerciseCategoryById],
   );
 
   const activeSession = useMemo(() => findActiveSession(sessions), [sessions]);

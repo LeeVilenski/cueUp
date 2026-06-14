@@ -1,9 +1,9 @@
 import { getSessionStreaks, getTotalPracticeMinutes, getWeeklySessionCount } from '@/lib/stats/sessions';
-import { makeSession } from '@/lib/stats/test-fixtures';
+import { makeBreakLog, makeSession } from '@/lib/stats/test-fixtures';
 
 describe('getSessionStreaks', () => {
-  it('returns zero streaks when there are no sessions', () => {
-    expect(getSessionStreaks([])).toEqual({ current: 0, longest: 0 });
+  it('returns zero streaks when there are no sessions or break logs', () => {
+    expect(getSessionStreaks([], [])).toEqual({ current: 0, longest: 0 });
   });
 
   it('counts the current streak including today', () => {
@@ -14,7 +14,7 @@ describe('getSessionStreaks', () => {
       makeSession({ startedAt: '2024-01-10T09:00:00.000Z' }),
     ];
 
-    expect(getSessionStreaks(sessions, now)).toEqual({ current: 3, longest: 3 });
+    expect(getSessionStreaks(sessions, [], now)).toEqual({ current: 3, longest: 3 });
   });
 
   it('counts the current streak as still alive if the most recent session was yesterday', () => {
@@ -24,7 +24,7 @@ describe('getSessionStreaks', () => {
       makeSession({ startedAt: '2024-01-09T09:00:00.000Z' }),
     ];
 
-    expect(getSessionStreaks(sessions, now)).toEqual({ current: 2, longest: 2 });
+    expect(getSessionStreaks(sessions, [], now)).toEqual({ current: 2, longest: 2 });
   });
 
   it('resets the current streak if there is a gap since yesterday', () => {
@@ -35,7 +35,7 @@ describe('getSessionStreaks', () => {
       makeSession({ startedAt: '2024-01-03T09:00:00.000Z' }),
     ];
 
-    expect(getSessionStreaks(sessions, now)).toEqual({ current: 0, longest: 3 });
+    expect(getSessionStreaks(sessions, [], now)).toEqual({ current: 0, longest: 3 });
   });
 
   it('finds the longest streak even if it is not the most recent', () => {
@@ -48,7 +48,15 @@ describe('getSessionStreaks', () => {
       makeSession({ startedAt: '2024-01-10T09:00:00.000Z' }),
     ];
 
-    expect(getSessionStreaks(sessions, now)).toEqual({ current: 0, longest: 4 });
+    expect(getSessionStreaks(sessions, [], now)).toEqual({ current: 0, longest: 4 });
+  });
+
+  it('counts a break log on its own as a streak day, even without a session', () => {
+    const now = new Date('2024-01-10T18:00:00.000Z');
+    const sessions = [makeSession({ startedAt: '2024-01-09T09:00:00.000Z' })];
+    const breakLogs = [makeBreakLog({ achievedAt: '2024-01-10T19:00:00.000Z' })];
+
+    expect(getSessionStreaks(sessions, breakLogs, now)).toEqual({ current: 2, longest: 2 });
   });
 });
 

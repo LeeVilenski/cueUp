@@ -67,6 +67,9 @@ export default function SettingsScreen() {
 
         <Card>
           <ThemedText type="smallBold">Player name</ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            Used for the greeting on the Home screen.
+          </ThemedText>
           <TextInput
             value={playerName}
             onChangeText={(text) => {

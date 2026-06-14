@@ -1,4 +1,4 @@
-import type { Session } from '@/db/schema';
+import type { BreakLog, Session } from '@/db/schema';
 
 function dayKey(iso: string): string {
   return iso.slice(0, 10);
@@ -15,8 +15,11 @@ export type SessionStreaks = {
   longest: number;
 };
 
-export function getSessionStreaks(sessions: Session[], now: Date = new Date()): SessionStreaks {
-  const days = new Set(sessions.map((session) => dayKey(session.startedAt)));
+export function getSessionStreaks(sessions: Session[], breakLogs: BreakLog[] = [], now: Date = new Date()): SessionStreaks {
+  const days = new Set([
+    ...sessions.map((session) => dayKey(session.startedAt)),
+    ...breakLogs.map((breakLog) => dayKey(breakLog.achievedAt)),
+  ]);
   if (days.size === 0) return { current: 0, longest: 0 };
 
   const sortedDays = [...days].sort();

@@ -9,8 +9,8 @@ export const TIPS_SEED: TipSeed[] = [
     title: 'Pre-shot routine',
     category: 'fundamentals',
     body:
-      '- Use the same number of practice strokes on every shot, no matter how easy or hard.\n' +
-      '- Take a final, still look at the object ball (and the pot angle) immediately before striking.\n' +
+      '- Use the same number of practice strokes on every shot, no matter the difficulty.\n' +
+      '- Take a final look at the potting angle on the object ball immediately before striking.\n' +
       '- Build a routine you can repeat under pressure — consistency here reduces nerves in matches.',
     sortOrder: 1,
   },
@@ -44,7 +44,7 @@ export const TIPS_SEED: TipSeed[] = [
     body:
       '- Before every shot, decide where you want the cue ball to finish — not just which ball you are potting.\n' +
       '- If there is no good position after the "obvious" pot, look for an alternative that leaves a better next shot.\n' +
-      '- When in doubt, choose the higher-percentage shot — a missed difficult pot is usually worse than a safe, simple one.',
+      '- When in doubt, choose the higher-percentage shot — a missed difficult pot can be worse than a safe, simple one.',
     sortOrder: 4,
   },
   {

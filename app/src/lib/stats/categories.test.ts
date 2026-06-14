@@ -27,6 +27,28 @@ describe('getCategoryCoverage', () => {
     expect(coverage.safety).toBe(0);
     expect(coverage.break_building).toBe(0);
   });
+
+  it('counts all results regardless of date when no lookback window is given', () => {
+    const now = new Date('2024-01-20T00:00:00.000Z');
+    const potting = makeExercise({ id: 'potting-1', category: 'potting' });
+    const safety = makeExercise({ id: 'safety-1', category: 'safety' });
+
+    const results = [
+      {
+        sessionExercise: makeSessionExercise({ exerciseId: 'potting-1', completedAt: '2024-01-18T00:00:00.000Z' }),
+        exercise: potting,
+      },
+      {
+        sessionExercise: makeSessionExercise({ exerciseId: 'safety-1', completedAt: '2023-12-01T00:00:00.000Z' }),
+        exercise: safety,
+      },
+    ];
+
+    const coverage = getCategoryCoverage(results, undefined, now);
+    expect(coverage.potting).toBe(1);
+    expect(coverage.safety).toBe(1);
+    expect(coverage.break_building).toBe(0);
+  });
 });
 
 describe('getNeglectedCategories', () => {

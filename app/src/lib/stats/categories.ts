@@ -16,14 +16,14 @@ export function createEmptyCoverage(): CategoryCoverage {
 
 export function getCategoryCoverage(
   results: ExerciseResult[],
-  sinceDays: number,
+  sinceDays?: number,
   now: Date = new Date(),
 ): CategoryCoverage {
   const coverage = createEmptyCoverage();
-  const cutoff = now.getTime() - sinceDays * 24 * 60 * 60 * 1000;
+  const cutoff = sinceDays != null ? now.getTime() - sinceDays * 24 * 60 * 60 * 1000 : null;
 
   for (const { sessionExercise, exercise } of results) {
-    if (new Date(sessionExercise.completedAt).getTime() >= cutoff) {
+    if (cutoff == null || new Date(sessionExercise.completedAt).getTime() >= cutoff) {
       coverage[exercise.category] += 1;
     }
   }

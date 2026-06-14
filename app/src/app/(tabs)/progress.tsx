@@ -93,7 +93,7 @@ export default function ProgressScreen() {
         </Card>
 
         <Card>
-          <ThemedText type="default">Category coverage (last {coverageWindowDays} days)</ThemedText>
+          <ThemedText type="default">Category coverage (all time)</ThemedText>
           {EXERCISE_CATEGORIES.map((category) => (
             <View key={category} style={styles.coverageRow}>
               <View style={[styles.categoryDot, { backgroundColor: CategoryColors[category] }]} />
@@ -105,7 +105,8 @@ export default function ProgressScreen() {
           ))}
           {neglected.length > 0 && (
             <ThemedText type="small" themeColor="textSecondary" style={styles.coverageNote}>
-              Not practiced recently: {neglected.map((category) => CategoryLabels[category]).join(', ')}
+              Not practiced in the last {coverageWindowDays} days:{' '}
+              {neglected.map((category) => CategoryLabels[category]).join(', ')}
             </ThemedText>
           )}
         </Card>
