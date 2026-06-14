@@ -102,7 +102,6 @@ export default function ExerciseDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
   },
   centered: {
     flex: 1,

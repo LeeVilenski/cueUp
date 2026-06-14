@@ -290,12 +290,12 @@ function ResultInput({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
   },
   content: {
     flex: 1,
     width: '100%',
     maxWidth: MaxContentWidth,
+    alignSelf: 'center',
     padding: Spacing.three,
     gap: Spacing.three,
   },

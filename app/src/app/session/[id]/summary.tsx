@@ -145,7 +145,6 @@ function formatResult(sessionExercise: SessionExercise, exercise: Exercise): str
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
   },
   content: {
     width: '100%',
