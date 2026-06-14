@@ -14,6 +14,10 @@ export const Colors = {
     backgroundElement: '#F0F0F3',
     backgroundSelected: '#E0E1E6',
     textSecondary: '#60646C',
+    tint: '#1B7A43',
+    tintText: '#ffffff',
+    border: '#DCDEE3',
+    danger: '#C53D3D',
   },
   dark: {
     text: '#ffffff',
@@ -21,10 +25,40 @@ export const Colors = {
     backgroundElement: '#212225',
     backgroundSelected: '#2E3135',
     textSecondary: '#B0B4BA',
+    tint: '#3DDC84',
+    tintText: '#00210F',
+    border: '#33363B',
+    danger: '#FF6B6B',
   },
 } as const;
 
 export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
+
+/** Fixed accent colours per exercise category, used for badges/icons across Library and Progress. */
+export const CategoryColors: Record<string, string> = {
+  potting: '#2E6FF2',
+  safety: '#8A3FFC',
+  break_building: '#1B7A43',
+  positional_play: '#C97A1B',
+  cueing_fundamentals: '#0E8FA3',
+  match_practice: '#C53D3D',
+};
+
+export const CategoryLabels: Record<string, string> = {
+  potting: 'Potting',
+  safety: 'Safety',
+  break_building: 'Break building',
+  positional_play: 'Positional play',
+  cueing_fundamentals: 'Cueing fundamentals',
+  match_practice: 'Match practice',
+};
+
+export const Radius = {
+  small: 8,
+  medium: 12,
+  large: 16,
+  pill: 999,
+} as const;
 
 export const Fonts = Platform.select({
   ios: {
