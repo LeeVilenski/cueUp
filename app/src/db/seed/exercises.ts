@@ -105,7 +105,7 @@ export const EXERCISES_SEED: NewExercise[] = [
     name: 'Pendulum / Straight-Cue Drill',
     category: 'cueing_fundamentals',
     description:
-      'Place the cue ball on the centre spot and aim down the centre line of the table at a target (a coin or chalk) on the baulk cushion. Strike a dead-straight shot and check that the cue ball returns along the same line. Repeat 10 times.',
+      'Place the cue ball on the brown spot and aim down the centre line of the table at a target (a coin or chalk) on the baulk cushion. Strike a dead-straight shot and check that the cue ball returns along the same line. Repeat 10 times.',
     bestPracticeTips:
       '- Watch your cue tip at the moment of contact — it should travel straight through, not veer off-line.\n' +
       '- This drill exposes alignment issues: if the cue ball consistently drifts one way, check your stance and bridge.\n' +
