@@ -63,7 +63,7 @@ export default function ProgressScreen() {
           />
           <Stat label="Rolling average" value={rollingAverage != null ? rollingAverage.toFixed(1) : '–'} />
           <Stat label="Current streak" value={`${streaks.current} day${streaks.current === 1 ? '' : 's'}`} />
-          <Stat label="This week" value={`${weeklyCount}/${weeklyGoal}`} />
+          <Stat label="Weekly" value={`${weeklyCount}/${weeklyGoal}`} />
         </Card>
 
         <Card>

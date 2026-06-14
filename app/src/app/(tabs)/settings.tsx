@@ -1,3 +1,4 @@
+import Constants from 'expo-constants';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 
@@ -13,6 +14,9 @@ import { useTheme } from '@/hooks/use-theme';
 import { BREAK_CONTEXT_LABELS } from '@/lib/break-format';
 import { useAppSettings } from '@/lib/hooks/use-app-settings';
 import { updateSettings } from '@/lib/settings';
+
+const appVersion = Constants.expoConfig?.version ?? Constants.nativeAppVersion ?? '—';
+const buildVersion = Constants.nativeBuildVersion;
 
 export default function SettingsScreen() {
   const theme = useTheme();
@@ -110,7 +114,7 @@ export default function SettingsScreen() {
         <Card>
           <ThemedText type="smallBold">Weekly session goal</ThemedText>
           <ThemedText type="small" themeColor="textSecondary">
-            Used for the "This week" progress shown on Home and Progress.
+            Used for the "Weekly" progress shown on Home and Progress.
           </ThemedText>
           <NumericStepper
             value={weeklySessionGoal}
@@ -134,6 +138,14 @@ export default function SettingsScreen() {
           <View style={styles.cardButton}>
             <Button label="Sync now" variant="secondary" disabled fullWidth />
           </View>
+        </Card>
+
+        <Card>
+          <ThemedText type="smallBold">About</ThemedText>
+          <ThemedText type="small" themeColor="textSecondary">
+            CueUp v{appVersion}
+            {buildVersion ? ` (build ${buildVersion})` : ''}
+          </ThemedText>
         </Card>
       </ScrollView>
     </ThemedView>

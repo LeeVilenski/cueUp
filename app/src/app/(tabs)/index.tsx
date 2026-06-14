@@ -69,7 +69,7 @@ export default function HomeScreen() {
             accentColor={theme.tint}
           />
           <Stat label="Current streak" value={`${streaks.current} day${streaks.current === 1 ? '' : 's'}`} />
-          <Stat label="This week" value={`${weeklyCount}/${weeklyGoal}`} />
+          <Stat label="Weekly" value={`${weeklyCount}/${weeklyGoal}`} />
         </Card>
 
         <Card>
