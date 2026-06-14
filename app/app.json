@@ -15,7 +15,11 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
+<<<<<<< HEAD
       "package": "com.leevilenski.app"
+=======
+      "package": "com.cueup.app"
+>>>>>>> 7f7d73bbf529344c2cf7f5cf7873917e6e07db8b
     },
     "web": {
       "output": "static",
