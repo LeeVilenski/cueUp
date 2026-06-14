@@ -1,6 +1,7 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { FlatList, Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -26,6 +27,7 @@ export default function ActiveSessionScreen() {
   }>();
   const router = useRouter();
   const theme = useTheme();
+  const insets = useSafeAreaInsets();
   const { session } = useSession(id);
   const { exercises: library } = useExercises();
 
@@ -105,10 +107,15 @@ export default function ActiveSessionScreen() {
   const minutes = Math.floor(elapsed / 60).toString().padStart(2, '0');
   const seconds = (elapsed % 60).toString().padStart(2, '0');
 
+  const contentStyle = [
+    styles.content,
+    { paddingTop: Spacing.three + insets.top, paddingBottom: Spacing.three + insets.bottom },
+  ];
+
   if (pickerOpen) {
     return (
       <ThemedView style={styles.container}>
-        <View style={styles.content}>
+        <View style={contentStyle}>
           <ThemedText type="subtitle">Add exercise</ThemedText>
           <FlatList
             data={library}
@@ -137,7 +144,7 @@ export default function ActiveSessionScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <View style={styles.content}>
+      <View style={contentStyle}>
         <View style={styles.header}>
           <ThemedText type="subtitle">Session</ThemedText>
           <ThemedText type="title" style={styles.timer}>
