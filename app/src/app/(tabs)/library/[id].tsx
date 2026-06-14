@@ -1,4 +1,5 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
@@ -10,13 +11,17 @@ import { Sparkline } from '@/components/ui/sparkline';
 import { CategoryColors, CategoryLabels, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import { DIFFICULTY_LABELS, formatScoring, parseBulletList } from '@/lib/exercise-format';
 import { useExercise } from '@/lib/hooks/use-exercises';
+import { useActiveSession } from '@/lib/hooks/use-sessions';
 import { useRecentAttempts } from '@/lib/hooks/use-session-exercises';
+import { startSession } from '@/lib/sessions';
 
 export default function ExerciseDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
   const { exercise, loading } = useExercise(id);
   const { attempts, loading: attemptsLoading } = useRecentAttempts(id);
+  const { activeSession } = useActiveSession();
+  const [addingToSession, setAddingToSession] = useState(false);
 
   if (loading) {
     return (
@@ -38,6 +43,16 @@ export default function ExerciseDetailScreen() {
     .map((attempt) => attempt.resultValue)
     .filter((value): value is number => value != null)
     .reverse();
+
+  const handleAddToSession = async () => {
+    setAddingToSession(true);
+    if (activeSession) {
+      router.push(`/session/${activeSession.id}/active?addExercise=${exercise.id}`);
+    } else {
+      const sessionId = await startSession();
+      router.push(`/session/${sessionId}/active?exercises=${exercise.id}`);
+    }
+  };
 
   return (
     <ThemedView style={styles.container}>
@@ -93,7 +108,7 @@ export default function ExerciseDetailScreen() {
           )}
         </Card>
 
-        <Button label="Add to session" onPress={() => router.push('/session/new')} fullWidth />
+        <Button label="Add to session" onPress={handleAddToSession} loading={addingToSession} fullWidth />
       </ScrollView>
     </ThemedView>
   );

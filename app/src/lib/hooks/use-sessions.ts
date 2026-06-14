@@ -21,6 +21,16 @@ export function useSessions() {
   return { sessions: data, loading, refresh };
 }
 
+export function findActiveSession(sessions: Session[]): Session | null {
+  return sessions.find((session) => session.endedAt == null) ?? null;
+}
+
+export function useActiveSession() {
+  const { sessions, loading, refresh } = useSessions();
+  const activeSession = findActiveSession(sessions);
+  return { activeSession, loading, refresh };
+}
+
 export function useSession(id: string | undefined) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);

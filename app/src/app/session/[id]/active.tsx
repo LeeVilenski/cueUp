@@ -19,15 +19,23 @@ import { addSessionExercise } from '@/lib/sessions';
 import { useTheme } from '@/hooks/use-theme';
 
 export default function ActiveSessionScreen() {
-  const { id, exercises: exercisesParam } = useLocalSearchParams<{ id: string; exercises?: string }>();
+  const { id, exercises: exercisesParam, addExercise } = useLocalSearchParams<{
+    id: string;
+    exercises?: string;
+    addExercise?: string;
+  }>();
   const router = useRouter();
   const theme = useTheme();
   const { session } = useSession(id);
   const { exercises: library } = useExercises();
 
-  const [queue, setQueue] = useState<string[]>(() =>
-    exercisesParam ? exercisesParam.split(',').filter(Boolean) : []
-  );
+  const [queue, setQueue] = useState<string[]>(() => {
+    const initial = exercisesParam ? exercisesParam.split(',').filter(Boolean) : [];
+    if (addExercise && !initial.includes(addExercise)) {
+      return [...initial, addExercise];
+    }
+    return initial;
+  });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [elapsed, setElapsed] = useState(0);
   const [pickerOpen, setPickerOpen] = useState(false);

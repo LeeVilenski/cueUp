@@ -5,7 +5,7 @@ import type { ExerciseCategory } from '@/db/schema';
 import { useAppSettings } from '@/lib/hooks/use-app-settings';
 import { useBreakLogs } from '@/lib/hooks/use-break-logs';
 import { useExercises } from '@/lib/hooks/use-exercises';
-import { useAllSessionExerciseResults, useSessions } from '@/lib/hooks/use-sessions';
+import { findActiveSession, useAllSessionExerciseResults, useSessions } from '@/lib/hooks/use-sessions';
 import { getBreakTrend, getPersonalBests, getRollingAverage } from '@/lib/stats/breaks';
 import { getCategoryCoverage, getNeglectedCategories } from '@/lib/stats/categories';
 import { getSessionStreaks, getTotalPracticeMinutes, getWeeklySessionCount } from '@/lib/stats/sessions';
@@ -57,7 +57,7 @@ export function useDashboardStats() {
     [coverage, exerciseCategoryById],
   );
 
-  const activeSession = useMemo(() => sessions.find((session) => session.endedAt == null) ?? null, [sessions]);
+  const activeSession = useMemo(() => findActiveSession(sessions), [sessions]);
 
   return {
     loading: breakLogsLoading || sessionsLoading || resultsLoading || exercisesLoading || settingsLoading,
