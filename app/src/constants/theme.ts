@@ -10,38 +10,41 @@ import { Platform } from 'react-native';
 export const Colors = {
   light: {
     text: '#000000',
-    background: '#ffffff',
-    backgroundElement: '#F0F0F3',
-    backgroundSelected: '#E0E1E6',
-    textSecondary: '#60646C',
+    background: '#F7FAF8',
+    backgroundElement: '#EAF1EC',
+    backgroundSelected: '#D9EAE0',
+    textSecondary: '#5B6760',
     tint: '#1B7A43',
     tintText: '#ffffff',
-    border: '#DCDEE3',
+    border: '#D7E5DC',
     danger: '#C53D3D',
   },
   dark: {
     text: '#ffffff',
-    background: '#000000',
-    backgroundElement: '#212225',
-    backgroundSelected: '#2E3135',
-    textSecondary: '#B0B4BA',
-    tint: '#3DDC84',
+    background: '#0A0F0C',
+    backgroundElement: '#1A2420',
+    backgroundSelected: '#24352B',
+    textSecondary: '#A9B6AE',
+    tint: '#2FBD7E',
     tintText: '#00210F',
-    border: '#33363B',
+    border: '#2C3B32',
     danger: '#FF6B6B',
   },
 } as const;
 
 export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 
-/** Fixed accent colours per exercise category, used for badges/icons across Library and Progress. */
+/**
+ * Fixed accent colours per exercise category, used for badges/icons across Library and Progress.
+ * Inspired by snooker ball colours (yellow, green, brown, blue, pink, red).
+ */
 export const CategoryColors: Record<string, string> = {
-  potting: '#2E6FF2',
-  safety: '#8A3FFC',
+  potting: '#B8860B',
+  safety: '#1B6FE0',
   break_building: '#1B7A43',
-  positional_play: '#C97A1B',
-  cueing_fundamentals: '#0E8FA3',
-  match_practice: '#C53D3D',
+  positional_play: '#8B5A2B',
+  cueing_fundamentals: '#C2447A',
+  match_practice: '#D6383D',
 };
 
 export const CategoryLabels: Record<string, string> = {
