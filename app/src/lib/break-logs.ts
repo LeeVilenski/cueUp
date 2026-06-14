@@ -22,6 +22,7 @@ export async function addBreakLog(input: {
     score: input.score,
     context: input.context,
     sessionId: input.sessionId ?? null,
+    matchId: null,
     achievedAt: now,
     notes: input.notes?.trim() ? input.notes.trim() : null,
     isPersonalBest: false,
@@ -41,7 +42,7 @@ export async function deleteBreakLog(id: string): Promise<void> {
   await recomputePersonalBests();
 }
 
-async function recomputePersonalBests(): Promise<void> {
+export async function recomputePersonalBests(): Promise<void> {
   const db = getDatabase();
   await db.update(breakLogs).set({ isPersonalBest: false });
   const [row] = await db.select({ max: sql<number | null>`max(score)` }).from(breakLogs);

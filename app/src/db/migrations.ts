@@ -67,11 +67,40 @@ CREATE TABLE IF NOT EXISTS session_exercises (
 );
 CREATE INDEX IF NOT EXISTS idx_session_exercises_session ON session_exercises(session_id);
 
+CREATE TABLE IF NOT EXISTS matches (
+  id TEXT PRIMARY KEY,
+  opponent_name TEXT NOT NULL,
+  is_league INTEGER NOT NULL DEFAULT 0,
+  result TEXT NOT NULL CHECK (result IN ('win','loss','draw')),
+  frames_won INTEGER,
+  frames_lost INTEGER,
+  played_at TEXT NOT NULL,
+  notes TEXT,
+  sync_status TEXT NOT NULL DEFAULT 'pending' CHECK (sync_status IN ('pending','synced')),
+  remote_id TEXT,
+  updated_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_matches_played_at ON matches(played_at DESC);
+
+CREATE TABLE IF NOT EXISTS match_frames (
+  id TEXT PRIMARY KEY,
+  match_id TEXT NOT NULL REFERENCES matches(id) ON DELETE CASCADE,
+  frame_number INTEGER NOT NULL,
+  player_score INTEGER NOT NULL,
+  opponent_score INTEGER NOT NULL,
+  player_high_break INTEGER,
+  opponent_high_break INTEGER,
+  sync_status TEXT NOT NULL DEFAULT 'pending' CHECK (sync_status IN ('pending','synced')),
+  remote_id TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_match_frames_match ON match_frames(match_id);
+
 CREATE TABLE IF NOT EXISTS break_logs (
   id TEXT PRIMARY KEY,
   score INTEGER NOT NULL CHECK (score >= 0 AND score <= 147),
   context TEXT NOT NULL DEFAULT 'practice' CHECK (context IN ('practice','match','league')),
   session_id TEXT REFERENCES sessions(id) ON DELETE SET NULL,
+  match_id TEXT REFERENCES matches(id) ON DELETE CASCADE,
   achieved_at TEXT NOT NULL,
   notes TEXT,
   is_personal_best INTEGER NOT NULL DEFAULT 0,
@@ -97,6 +126,7 @@ INSERT OR IGNORE INTO app_settings (id) VALUES (1);
 export async function runMigrations(sqlite: SQLiteDatabase) {
   await sqlite.execAsync(SCHEMA_SQL);
   await migrateExerciseCategoryConstraint(sqlite);
+  await migrateBreakLogsMatchId(sqlite);
 }
 
 /**
@@ -119,4 +149,12 @@ async function migrateExerciseCategoryConstraint(sqlite: SQLiteDatabase) {
     ALTER TABLE exercises_new RENAME TO exercises;
   `);
   await sqlite.execAsync(`PRAGMA foreign_keys = ON;`);
+}
+
+/** Installs created before match logging existed are missing `break_logs.match_id`; add it so match breaks can link back. */
+async function migrateBreakLogsMatchId(sqlite: SQLiteDatabase) {
+  const columns = await sqlite.getAllAsync<{ name: string }>(`PRAGMA table_info(break_logs)`);
+  if (columns.some((column) => column.name === 'match_id')) return;
+
+  await sqlite.execAsync(`ALTER TABLE break_logs ADD COLUMN match_id TEXT REFERENCES matches(id) ON DELETE CASCADE;`);
 }

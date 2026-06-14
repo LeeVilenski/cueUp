@@ -1,4 +1,4 @@
-import type { BreakLog, Exercise, Session, SessionExercise } from '@/db/schema';
+import type { BreakLog, Exercise, Match, Session, SessionExercise } from '@/db/schema';
 
 export function makeBreakLog(overrides: Partial<BreakLog> = {}): BreakLog {
   return {
@@ -6,6 +6,7 @@ export function makeBreakLog(overrides: Partial<BreakLog> = {}): BreakLog {
     score: 0,
     context: 'practice',
     sessionId: null,
+    matchId: null,
     achievedAt: '2024-01-01T00:00:00.000Z',
     notes: null,
     isPersonalBest: false,
@@ -50,6 +51,23 @@ export function makeExercise(overrides: Partial<Exercise> = {}): Exercise {
     syncStatus: 'pending',
     remoteId: null,
     createdAt: '2024-01-01T00:00:00.000Z',
+    updatedAt: '2024-01-01T00:00:00.000Z',
+    ...overrides,
+  };
+}
+
+export function makeMatch(overrides: Partial<Match> = {}): Match {
+  return {
+    id: 'match-1',
+    opponentName: 'Opponent',
+    isLeague: false,
+    result: 'win',
+    framesWon: null,
+    framesLost: null,
+    playedAt: '2024-01-01T00:00:00.000Z',
+    notes: null,
+    syncStatus: 'pending',
+    remoteId: null,
     updatedAt: '2024-01-01T00:00:00.000Z',
     ...overrides,
   };

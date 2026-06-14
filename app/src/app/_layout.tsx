@@ -16,6 +16,9 @@ export default function RootLayout() {
           <Stack.Screen name="session/[id]/summary" options={{ title: 'Session summary' }} />
           <Stack.Screen name="break-log/new" options={{ presentation: 'modal', title: 'Log a break' }} />
           <Stack.Screen name="break-log/index" options={{ title: 'Break history' }} />
+          <Stack.Screen name="match/new" options={{ presentation: 'modal', title: 'Log a match' }} />
+          <Stack.Screen name="match/index" options={{ title: 'Match history' }} />
+          <Stack.Screen name="match/[id]" options={{ title: 'Match detail' }} />
         </Stack>
       </DatabaseProvider>
     </ThemeProvider>

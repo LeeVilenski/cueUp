@@ -5,9 +5,11 @@ import type { ExerciseCategory } from '@/db/schema';
 import { useAppSettings } from '@/lib/hooks/use-app-settings';
 import { useBreakLogs } from '@/lib/hooks/use-break-logs';
 import { useExercises } from '@/lib/hooks/use-exercises';
+import { useMatches } from '@/lib/hooks/use-matches';
 import { findActiveSession, useAllSessionExerciseResults, useSessions } from '@/lib/hooks/use-sessions';
 import { getBreakTrend, getPersonalBests, getRollingAverage } from '@/lib/stats/breaks';
 import { getCategoryCoverage, getNeglectedCategories } from '@/lib/stats/categories';
+import { getMatchRecord } from '@/lib/stats/matches';
 import { getSessionStreaks, getTotalPracticeMinutes, getWeeklySessionCount } from '@/lib/stats/sessions';
 import { suggestRoutine } from '@/lib/stats/suggestions';
 import { getWeakAreas } from '@/lib/stats/weak-areas';
@@ -20,6 +22,7 @@ export function useDashboardStats() {
   const { results, loading: resultsLoading, refresh: refreshResults } = useAllSessionExerciseResults();
   const { exercises, loading: exercisesLoading } = useExercises();
   const { settings, loading: settingsLoading, refresh: refreshSettings } = useAppSettings();
+  const { matches, loading: matchesLoading, refresh: refreshMatches } = useMatches();
 
   useFocusEffect(
     useCallback(() => {
@@ -27,7 +30,8 @@ export function useDashboardStats() {
       refreshSessions();
       refreshResults();
       refreshSettings();
-    }, [refreshBreakLogs, refreshSessions, refreshResults, refreshSettings]),
+      refreshMatches();
+    }, [refreshBreakLogs, refreshSessions, refreshResults, refreshSettings, refreshMatches]),
   );
 
   const personalBests = useMemo(() => getPersonalBests(breakLogs), [breakLogs]);
@@ -59,14 +63,18 @@ export function useDashboardStats() {
   );
 
   const activeSession = useMemo(() => findActiveSession(sessions), [sessions]);
+  const matchRecord = useMemo(() => getMatchRecord(matches), [matches]);
 
   return {
-    loading: breakLogsLoading || sessionsLoading || resultsLoading || exercisesLoading || settingsLoading,
+    loading:
+      breakLogsLoading || sessionsLoading || resultsLoading || exercisesLoading || settingsLoading || matchesLoading,
     breakLogs,
     sessions,
     activeSession,
     results,
     settings,
+    matches,
+    matchRecord,
     weeklyGoal: settings?.weeklySessionGoal ?? 3,
     personalBests,
     rollingAverage,

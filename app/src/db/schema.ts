@@ -36,6 +36,9 @@ export type TipCategory = (typeof TIP_CATEGORIES)[number];
 export const BREAK_CONTEXTS = ['practice', 'match', 'league'] as const;
 export type BreakContext = (typeof BREAK_CONTEXTS)[number];
 
+export const MATCH_RESULTS = ['win', 'loss', 'draw'] as const;
+export type MatchResult = (typeof MATCH_RESULTS)[number];
+
 export const SYNC_STATUSES = ['pending', 'synced'] as const;
 export type SyncStatus = (typeof SYNC_STATUSES)[number];
 
@@ -103,12 +106,41 @@ export const breakLogs = sqliteTable('break_logs', {
   score: integer('score').notNull(),
   context: text('context', { enum: BREAK_CONTEXTS }).notNull().default('practice'),
   sessionId: text('session_id').references(() => sessions.id, { onDelete: 'set null' }),
+  matchId: text('match_id').references(() => matches.id, { onDelete: 'cascade' }),
   achievedAt: text('achieved_at').notNull(),
   notes: text('notes'),
   isPersonalBest: integer('is_personal_best', { mode: 'boolean' }).notNull().default(false),
   syncStatus: text('sync_status', { enum: SYNC_STATUSES }).notNull().default('pending'),
   remoteId: text('remote_id'),
   updatedAt: text('updated_at').notNull(),
+});
+
+export const matches = sqliteTable('matches', {
+  id: text('id').primaryKey(),
+  opponentName: text('opponent_name').notNull(),
+  isLeague: integer('is_league', { mode: 'boolean' }).notNull().default(false),
+  result: text('result', { enum: MATCH_RESULTS }).notNull(),
+  framesWon: integer('frames_won'),
+  framesLost: integer('frames_lost'),
+  playedAt: text('played_at').notNull(),
+  notes: text('notes'),
+  syncStatus: text('sync_status', { enum: SYNC_STATUSES }).notNull().default('pending'),
+  remoteId: text('remote_id'),
+  updatedAt: text('updated_at').notNull(),
+});
+
+export const matchFrames = sqliteTable('match_frames', {
+  id: text('id').primaryKey(),
+  matchId: text('match_id')
+    .notNull()
+    .references(() => matches.id, { onDelete: 'cascade' }),
+  frameNumber: integer('frame_number').notNull(),
+  playerScore: integer('player_score').notNull(),
+  opponentScore: integer('opponent_score').notNull(),
+  playerHighBreak: integer('player_high_break'),
+  opponentHighBreak: integer('opponent_high_break'),
+  syncStatus: text('sync_status', { enum: SYNC_STATUSES }).notNull().default('pending'),
+  remoteId: text('remote_id'),
 });
 
 export const appSettings = sqliteTable('app_settings', {
@@ -131,4 +163,8 @@ export type SessionExercise = typeof sessionExercises.$inferSelect;
 export type NewSessionExercise = typeof sessionExercises.$inferInsert;
 export type BreakLog = typeof breakLogs.$inferSelect;
 export type NewBreakLog = typeof breakLogs.$inferInsert;
+export type Match = typeof matches.$inferSelect;
+export type NewMatch = typeof matches.$inferInsert;
+export type MatchFrame = typeof matchFrames.$inferSelect;
+export type NewMatchFrame = typeof matchFrames.$inferInsert;
 export type AppSettings = typeof appSettings.$inferSelect;

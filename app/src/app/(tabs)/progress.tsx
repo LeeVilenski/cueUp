@@ -42,6 +42,7 @@ export default function ProgressScreen() {
     exerciseNameById,
     suggestedRoutine,
     coverageWindowDays,
+    matchRecord,
   } = useDashboardStats();
 
   const handleStartSuggested = async () => {
@@ -91,6 +92,14 @@ export default function ProgressScreen() {
             />
           ))}
         </Card>
+
+        {matchRecord.played > 0 ? (
+          <Card style={styles.statsGrid}>
+            <Stat label="Matches played" value={`${matchRecord.played}`} />
+            <Stat label="Record" value={`${matchRecord.wins}-${matchRecord.losses}-${matchRecord.draws}`} />
+            <Stat label="Win rate" value={matchRecord.winRate != null ? `${Math.round(matchRecord.winRate * 100)}%` : '–'} />
+          </Card>
+        ) : null}
 
         <Card>
           <ThemedText type="default">Category coverage (all time)</ThemedText>

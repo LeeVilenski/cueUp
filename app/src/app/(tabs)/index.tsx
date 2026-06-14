@@ -11,10 +11,12 @@ import { MaxContentWidth, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 import { formatDate } from '@/lib/date-format';
 import { useDashboardStats } from '@/lib/hooks/use-dashboard-stats';
+import { MATCH_RESULT_LABELS } from '@/lib/match-format';
 import { MOOD_EMOJI } from '@/lib/mood-format';
 import { startSession } from '@/lib/sessions';
 
 const RECENT_SESSIONS_LIMIT = 3;
+const RECENT_MATCHES_LIMIT = 3;
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -23,6 +25,7 @@ export default function HomeScreen() {
 
   const {
     sessions,
+    matches,
     activeSession,
     personalBests,
     streaks,
@@ -40,6 +43,7 @@ export default function HomeScreen() {
   };
 
   const recentSessions = sessions.filter((session) => session.id !== activeSession?.id).slice(0, RECENT_SESSIONS_LIMIT);
+  const recentMatches = matches.slice(0, RECENT_MATCHES_LIMIT);
 
   return (
     <ThemedView style={styles.container}>
@@ -62,12 +66,14 @@ export default function HomeScreen() {
           </Card>
         ) : null}
 
+        <Button label="Start a session" onPress={() => router.push('/session/new')} fullWidth />
+
         <View style={styles.actionsRow}>
           <View style={styles.actionButton}>
-            <Button label="Start a session" onPress={() => router.push('/session/new')} fullWidth />
+            <Button label="Log a break" variant="secondary" onPress={() => router.push('/break-log/new')} fullWidth />
           </View>
           <View style={styles.actionButton}>
-            <Button label="Log a break" variant="secondary" onPress={() => router.push('/break-log/new')} fullWidth />
+            <Button label="Log a match" variant="secondary" onPress={() => router.push('/match/new')} fullWidth />
           </View>
         </View>
 
@@ -131,6 +137,37 @@ export default function HomeScreen() {
           <Card>
             <ThemedText themeColor="textSecondary">
               No sessions yet — start one above to begin tracking your progress.
+            </ThemedText>
+          </Card>
+        )}
+
+        <View style={styles.sectionHeader}>
+          <ThemedText type="default">Recent matches</ThemedText>
+          <Link href="/match" style={styles.link}>
+            <ThemedText type="linkPrimary">Match history</ThemedText>
+          </Link>
+        </View>
+
+        {recentMatches.length > 0 ? (
+          recentMatches.map((match) => (
+            <Card key={match.id} style={styles.sessionRow}>
+              <View style={styles.sessionInfo}>
+                <ThemedText type="default">{match.opponentName}</ThemedText>
+                <ThemedText type="small" themeColor="textSecondary">
+                  {formatDate(match.playedAt)}
+                  {match.isLeague ? ' · League' : ''}
+                </ThemedText>
+              </View>
+              <ThemedText type="small" themeColor="textSecondary">
+                {MATCH_RESULT_LABELS[match.result]}
+                {match.framesWon != null && match.framesLost != null ? ` · ${match.framesWon}–${match.framesLost}` : ''}
+              </ThemedText>
+            </Card>
+          ))
+        ) : (
+          <Card>
+            <ThemedText themeColor="textSecondary">
+              No matches logged yet — tap &quot;Log a match&quot; above to record one.
             </ThemedText>
           </Card>
         )}
