@@ -83,7 +83,10 @@ export default function NewBreakLogScreen() {
           <View>
             <TextInput
               value={score}
-              onChangeText={(text) => setScore(text.replace(/[^0-9]/g, '').replace(/^0+(?=\d)/, '').slice(0, 3))}
+              onChangeText={(text) => {
+                const cleaned = text.replace(/[^0-9]/g, '').replace(/^0+(?=\d)/, '').slice(0, 3);
+                setScore(cleaned !== '' && Number(cleaned) > MAX_BREAK_SCORE ? `${MAX_BREAK_SCORE}` : cleaned);
+              }}
               placeholder="0"
               placeholderTextColor={theme.textSecondary}
               keyboardType="number-pad"

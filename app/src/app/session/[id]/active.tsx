@@ -253,9 +253,10 @@ function ResultInput({
         <View style={styles.resultInput}>
           <TextInput
             value={breakScore}
-            onChangeText={(text) =>
-              onBreakScoreChange(text.replace(/[^0-9]/g, '').replace(/^0+(?=\d)/, '').slice(0, 3))
-            }
+            onChangeText={(text) => {
+              const cleaned = text.replace(/[^0-9]/g, '').replace(/^0+(?=\d)/, '').slice(0, 3);
+              onBreakScoreChange(cleaned !== '' && Number(cleaned) > MAX_BREAK_SCORE ? `${MAX_BREAK_SCORE}` : cleaned);
+            }}
             placeholder="0"
             placeholderTextColor={theme.textSecondary}
             keyboardType="number-pad"

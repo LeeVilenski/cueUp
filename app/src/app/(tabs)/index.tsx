@@ -21,7 +21,7 @@ export default function HomeScreen() {
   const theme = useTheme();
   const [startingSuggested, setStartingSuggested] = useState(false);
 
-  const { sessions, personalBests, streaks, weeklyCount, weeklyGoal, exerciseNameById, suggestedRoutine } =
+  const { sessions, activeSession, personalBests, streaks, weeklyCount, weeklyGoal, exerciseNameById, suggestedRoutine } =
     useDashboardStats();
 
   const handleStartSuggested = async () => {
@@ -30,12 +30,28 @@ export default function HomeScreen() {
     router.push(`/session/${sessionId}/active?exercises=${suggestedRoutine.exerciseIds.join(',')}`);
   };
 
-  const recentSessions = sessions.slice(0, RECENT_SESSIONS_LIMIT);
+  const recentSessions = sessions.filter((session) => session.id !== activeSession?.id).slice(0, RECENT_SESSIONS_LIMIT);
 
   return (
     <ThemedView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         <ThemedText type="title">Snooker Coach</ThemedText>
+
+        {activeSession ? (
+          <Card style={styles.resumeCard}>
+            <View style={styles.sessionInfo}>
+              <ThemedText type="default">Session in progress</ThemedText>
+              <ThemedText type="small" themeColor="textSecondary">
+                Started {formatDate(activeSession.startedAt)}
+              </ThemedText>
+            </View>
+            <Button
+              label="Resume"
+              variant="secondary"
+              onPress={() => router.push(`/session/${activeSession.id}/active`)}
+            />
+          </Card>
+        ) : null}
 
         <View style={styles.actionsRow}>
           <View style={styles.actionButton}>
@@ -125,6 +141,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: Spacing.four,
     gap: Spacing.three,
+  },
+  resumeCard: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   actionsRow: {
     flexDirection: 'row',

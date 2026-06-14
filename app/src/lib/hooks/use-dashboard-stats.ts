@@ -57,10 +57,13 @@ export function useDashboardStats() {
     [coverage, exerciseCategoryById],
   );
 
+  const activeSession = useMemo(() => sessions.find((session) => session.endedAt == null) ?? null, [sessions]);
+
   return {
     loading: breakLogsLoading || sessionsLoading || resultsLoading || exercisesLoading || settingsLoading,
     breakLogs,
     sessions,
+    activeSession,
     results,
     settings,
     weeklyGoal: settings?.weeklySessionGoal ?? 3,
