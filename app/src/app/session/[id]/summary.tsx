@@ -10,11 +10,11 @@ import { NumericStepper } from '@/components/ui/numeric-stepper';
 import { CategoryColors, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
 import type { Exercise, SessionExercise } from '@/db/schema';
 import { useSession, useSessionExerciseResults } from '@/lib/hooks/use-sessions';
+import { MOOD_EMOJI } from '@/lib/mood-format';
 import { finishSession } from '@/lib/sessions';
 import { useTheme } from '@/hooks/use-theme';
 
 const MOODS = [1, 2, 3, 4, 5] as const;
-const MOOD_EMOJI: Record<number, string> = { 1: '😞', 2: '🙁', 3: '😐', 4: '🙂', 5: '😄' };
 
 export default function SessionSummaryScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();

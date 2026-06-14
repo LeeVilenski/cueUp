@@ -1,5 +1,5 @@
-import { useFocusEffect, useRouter } from 'expo-router';
-import { useCallback, useMemo, useState } from 'react';
+import { useRouter } from 'expo-router';
+import { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
@@ -9,21 +9,11 @@ import { Card } from '@/components/ui/card';
 import { Sparkline } from '@/components/ui/sparkline';
 import { Stat } from '@/components/ui/stat';
 import { CategoryColors, CategoryLabels, MaxContentWidth, Spacing } from '@/constants/theme';
-import { BREAK_CONTEXTS, EXERCISE_CATEGORIES, type ExerciseCategory } from '@/db/schema';
+import { BREAK_CONTEXTS, EXERCISE_CATEGORIES } from '@/db/schema';
 import { useTheme } from '@/hooks/use-theme';
 import { BREAK_CONTEXT_LABELS } from '@/lib/break-format';
-import { useAppSettings } from '@/lib/hooks/use-app-settings';
-import { useBreakLogs } from '@/lib/hooks/use-break-logs';
-import { useExercises } from '@/lib/hooks/use-exercises';
-import { useAllSessionExerciseResults, useSessions } from '@/lib/hooks/use-sessions';
+import { useDashboardStats } from '@/lib/hooks/use-dashboard-stats';
 import { startSession } from '@/lib/sessions';
-import { getBreakTrend, getPersonalBests, getRollingAverage } from '@/lib/stats/breaks';
-import { getCategoryCoverage, getNeglectedCategories } from '@/lib/stats/categories';
-import { getSessionStreaks, getTotalPracticeMinutes, getWeeklySessionCount } from '@/lib/stats/sessions';
-import { suggestRoutine } from '@/lib/stats/suggestions';
-import { getWeakAreas } from '@/lib/stats/weak-areas';
-
-const COVERAGE_WINDOW_DAYS = 30;
 
 function formatMinutes(totalMinutes: number): string {
   if (totalMinutes < 60) return `${totalMinutes}m`;
@@ -35,49 +25,24 @@ function formatMinutes(totalMinutes: number): string {
 export default function ProgressScreen() {
   const router = useRouter();
   const theme = useTheme();
-  const { breakLogs, refresh: refreshBreakLogs } = useBreakLogs();
-  const { sessions, refresh: refreshSessions } = useSessions();
-  const { results, refresh: refreshResults } = useAllSessionExerciseResults();
-  const { exercises } = useExercises();
-  const { settings } = useAppSettings();
   const [startingSuggested, setStartingSuggested] = useState(false);
 
-  useFocusEffect(
-    useCallback(() => {
-      refreshBreakLogs();
-      refreshSessions();
-      refreshResults();
-    }, [refreshBreakLogs, refreshSessions, refreshResults]),
-  );
-
-  const personalBests = useMemo(() => getPersonalBests(breakLogs), [breakLogs]);
-  const rollingAverage = useMemo(() => getRollingAverage(breakLogs), [breakLogs]);
-  const breakTrend = useMemo(() => getBreakTrend(breakLogs), [breakLogs]);
-  const streaks = useMemo(() => getSessionStreaks(sessions), [sessions]);
-  const weeklyCount = useMemo(() => getWeeklySessionCount(sessions), [sessions]);
-  const totalMinutes = useMemo(() => getTotalPracticeMinutes(sessions), [sessions]);
-  const coverage = useMemo(() => getCategoryCoverage(results, COVERAGE_WINDOW_DAYS), [results]);
-  const neglected = useMemo(() => getNeglectedCategories(coverage), [coverage]);
-  const weakAreas = useMemo(() => getWeakAreas(results), [results]);
-
-  const exerciseNameById = useMemo(() => {
-    const map = new Map<string, string>();
-    exercises.forEach((exercise) => map.set(exercise.id, exercise.name));
-    return map;
-  }, [exercises]);
-
-  const exerciseCategoryById = useMemo(() => {
-    const map = new Map<string, ExerciseCategory>();
-    exercises.forEach((exercise) => map.set(exercise.id, exercise.category));
-    return map;
-  }, [exercises]);
-
-  const suggestedRoutine = useMemo(
-    () => suggestRoutine(coverage, exerciseCategoryById),
-    [coverage, exerciseCategoryById],
-  );
-
-  const weeklyGoal = settings?.weeklySessionGoal ?? 3;
+  const {
+    sessions,
+    personalBests,
+    rollingAverage,
+    breakTrend,
+    streaks,
+    weeklyCount,
+    weeklyGoal,
+    totalMinutes,
+    coverage,
+    neglected,
+    weakAreas,
+    exerciseNameById,
+    suggestedRoutine,
+    coverageWindowDays,
+  } = useDashboardStats();
 
   const handleStartSuggested = async () => {
     setStartingSuggested(true);
@@ -128,7 +93,7 @@ export default function ProgressScreen() {
         </Card>
 
         <Card>
-          <ThemedText type="default">Category coverage (last {COVERAGE_WINDOW_DAYS} days)</ThemedText>
+          <ThemedText type="default">Category coverage (last {coverageWindowDays} days)</ThemedText>
           {EXERCISE_CATEGORIES.map((category) => (
             <View key={category} style={styles.coverageRow}>
               <View style={[styles.categoryDot, { backgroundColor: CategoryColors[category] }]} />
