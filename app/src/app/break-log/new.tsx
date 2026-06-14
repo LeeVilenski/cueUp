@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { KeyboardAvoidingView, Platform, StyleSheet, TextInput, View } from 'react-native';
 
@@ -17,6 +17,7 @@ export default function NewBreakLogScreen() {
   const router = useRouter();
   const theme = useTheme();
   const { settings } = useAppSettings();
+  const { sessionId } = useLocalSearchParams<{ sessionId?: string }>();
 
   const [score, setScore] = useState('');
   const [context, setContext] = useState<BreakContext>('practice');
@@ -40,7 +41,12 @@ export default function NewBreakLogScreen() {
   const handleSave = async () => {
     if (!isValid) return;
     setSaving(true);
-    const { isNewPersonalBest } = await addBreakLog({ score: scoreValue, context, notes });
+    const { isNewPersonalBest } = await addBreakLog({
+      score: scoreValue,
+      context,
+      notes,
+      sessionId: sessionId ?? null,
+    });
     setSaving(false);
     setResult({ score: scoreValue, context, isNewPersonalBest });
   };
