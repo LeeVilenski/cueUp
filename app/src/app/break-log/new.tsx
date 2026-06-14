@@ -175,5 +175,6 @@ const styles = StyleSheet.create({
   },
   successScore: {
     fontSize: 96,
+    lineHeight: 104,
   },
 });
