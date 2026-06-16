@@ -9,7 +9,9 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Sparkline } from '@/components/ui/sparkline';
 import { CategoryColors, CategoryLabels, MaxContentWidth, Radius, Spacing } from '@/constants/theme';
+import { TableDiagram } from '@/components/ui/table-diagram';
 import { DIFFICULTY_LABELS, formatScoring, parseBulletList } from '@/lib/exercise-format';
+import { EXERCISE_DIAGRAMS } from '@/lib/exercise-diagrams';
 import { useExercise } from '@/lib/hooks/use-exercises';
 import { useActiveSession } from '@/lib/hooks/use-sessions';
 import { useRecentAttempts } from '@/lib/hooks/use-session-exercises';
@@ -38,6 +40,8 @@ export default function ExerciseDetailScreen() {
       </ThemedView>
     );
   }
+
+  const diagram = EXERCISE_DIAGRAMS[exercise.id];
 
   const sparklineValues = attempts
     .map((attempt) => attempt.resultValue)
@@ -69,6 +73,13 @@ export default function ExerciseDetailScreen() {
         </View>
 
         <ThemedText type="subtitle">{exercise.name}</ThemedText>
+
+        {diagram ? (
+          <Card>
+            <ThemedText type="smallBold">Setup</ThemedText>
+            <TableDiagram {...diagram} />
+          </Card>
+        ) : null}
 
         <ThemedText>{exercise.description}</ThemedText>
 
