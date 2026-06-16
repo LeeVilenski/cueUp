@@ -278,12 +278,12 @@ export const EXERCISES_SEED: NewExercise[] = [
     name: 'Spider Potting Drill',
     category: 'cueing_fundamentals',
     description:
-      'Set up 8 positions where the spider (long rest) is the only option — the cue ball is tight to a top or side cushion, or locked near a cluster of balls. Start with easier spider shots (cue ball just touching the rail, medium-length pot) and work toward harder positions (cue ball bridging over balls, long diagonal pot). The spider demands a shorter stroke and precise address; patience and stillness matter more than power.',
+      'The spider is needed when balls are clustered between you and the cue ball, making both a normal bridge and the standard rest impossible (the rest head would collide with the blocking balls). Place the cue ball in the middle of the table and scatter 3–4 reds between it and the baulk end; the spider bridges over those reds so you can reach the cue ball. Set up 8 such positions, varying how many balls you must bridge over and the distance to the object ball.',
     bestPracticeTips:
-      '- Rest the spider head firmly against the cushion or ball it leans on before you get down — a moving rest ruins the shot before you even strike.\n' +
-      '- Use far less backswing than you think you need: the spider amplifies small stroke errors significantly.\n' +
-      '- Keep your eyes on the contact point on the object ball more than usual — your cue tip is behind the bridge head, so your vision must compensate for the hidden line.\n' +
-      '- Build difficulty gradually: nail the rail-touching position before moving to a bridge-over-balls position.',
+      '- Lower the spider head onto the blocking balls gently so it sits still before you get down — any movement in the bridge destroys your aim.\n' +
+      '- Use noticeably less backswing than normal: you cannot follow through naturally with the spider so the stroke must be clean and compact.\n' +
+      '- Keep both eyes focused on the contact point on the object ball — your cue tip is hidden behind the raised bridge head so your visual alignment carries extra responsibility.\n' +
+      '- Start with one blocking ball and a straight pot; add more blocking balls and angle only once you are comfortable with the basic delivery.',
     difficulty: 'intermediate',
     suggestedDurationMins: 20,
     scoringType: 'count_potted',

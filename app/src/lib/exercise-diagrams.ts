@@ -180,12 +180,13 @@ export const EXERCISE_DIAGRAMS: Record<string, DiagramSpec> = {
 
   'spider-potting-drill': {
     balls: [
-      { x: 0.92, y: 0.1, type: 'white' },
-      { x: 0.62, y: 0.5, type: 'red' },
-      { x: 0.45, y: 0.38, type: 'red' },
-      { x: 0.52, y: 0.7, type: 'red' },
+      { x: 0.58, y: 0.45, type: 'white' },
+      { x: 0.46, y: 0.38, type: 'red' },
+      { x: 0.44, y: 0.52, type: 'red' },
+      { x: 0.5, y: 0.62, type: 'red' },
+      { x: 0.82, y: 0.32, type: 'red' },
     ],
-    note: 'Cue ball tight to the top-corner cushion — use the spider. Shorten your backswing and let smoothness do the work.',
+    note: 'Reds between you and the cue ball block the rest head. Use the spider to bridge over them and reach the cue ball.',
   },
 
   'two-shot-position-drill': {
