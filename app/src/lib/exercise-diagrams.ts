@@ -26,9 +26,9 @@ export const EXERCISE_DIAGRAMS: Record<string, DiagramSpec> = {
 
   'century-break-practice': {
     balls: [
-      { x: 0.2, y: 0.3, type: 'yellow' },
-      { x: 0.2, y: 0.5, type: 'green' },
-      { x: 0.2, y: 0.7, type: 'brown' },
+      { x: 0.2, y: 0.3, type: 'green' },
+      { x: 0.2, y: 0.5, type: 'brown' },
+      { x: 0.2, y: 0.7, type: 'yellow' },
       { x: 0.5, y: 0.5, type: 'blue' },
       { x: 0.75, y: 0.5, type: 'pink' },
       { x: 0.9, y: 0.5, type: 'black' },
@@ -61,7 +61,7 @@ export const EXERCISE_DIAGRAMS: Record<string, DiagramSpec> = {
 
   'pendulum-straight-cue-drill': {
     balls: [{ x: 0.2, y: 0.5, type: 'white' }],
-    note: 'Cue ball on the green spot. Shoot straight into the baulk cushion and watch whether it returns along the exact same line — any drift reveals a cue-action flaw.',
+    note: 'Cue ball on the brown spot (centre of the baulk line). Shoot straight into the baulk cushion — the ball must return along the exact same line.',
   },
 
   'pairs-colours-break-building': {
@@ -93,9 +93,9 @@ export const EXERCISE_DIAGRAMS: Record<string, DiagramSpec> = {
 
   'match-simulation-vs-clock': {
     balls: [
-      { x: 0.2, y: 0.3, type: 'yellow' },
-      { x: 0.2, y: 0.5, type: 'green' },
-      { x: 0.2, y: 0.7, type: 'brown' },
+      { x: 0.2, y: 0.3, type: 'green' },
+      { x: 0.2, y: 0.5, type: 'brown' },
+      { x: 0.2, y: 0.7, type: 'yellow' },
       { x: 0.5, y: 0.5, type: 'blue' },
       { x: 0.75, y: 0.5, type: 'pink' },
       { x: 0.9, y: 0.5, type: 'black' },
@@ -144,9 +144,9 @@ export const EXERCISE_DIAGRAMS: Record<string, DiagramSpec> = {
 
   'clear-the-colours': {
     balls: [
-      { x: 0.2, y: 0.3, type: 'yellow' },
-      { x: 0.2, y: 0.5, type: 'green' },
-      { x: 0.2, y: 0.7, type: 'brown' },
+      { x: 0.2, y: 0.3, type: 'green' },
+      { x: 0.2, y: 0.5, type: 'brown' },
+      { x: 0.2, y: 0.7, type: 'yellow' },
       { x: 0.5, y: 0.5, type: 'blue' },
       { x: 0.75, y: 0.5, type: 'pink' },
       { x: 0.9, y: 0.5, type: 'black' },

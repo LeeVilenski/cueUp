@@ -105,7 +105,7 @@ export const EXERCISES_SEED: NewExercise[] = [
     name: 'Pendulum / Straight-Cue Drill',
     category: 'cueing_fundamentals',
     description:
-      'Place the cue ball on the green spot (centre of the baulk line) and shoot it straight into the baulk cushion. Watch carefully whether the ball returns along exactly the same line or drifts to one side. Any drift reveals a misalignment in your stance, bridge, or cue action. Repeat 10 times, pausing after each to observe the return path before adjusting. Do this as the first drill of every session — it takes under five minutes and surfaces problems early.',
+      'Place the cue ball on the brown spot (centre of the baulk line) and shoot it straight into the baulk cushion. Watch carefully whether the ball returns along exactly the same line or drifts to one side. Any drift reveals a misalignment in your stance, bridge, or cue action. Repeat 10 times, pausing after each to observe the return path before adjusting. Do this as the first drill of every session — it takes under five minutes and surfaces problems early.',
     bestPracticeTips:
       '- Watch your cue tip at the moment of contact — it must travel straight through, not veer left or right.\n' +
       '- If the ball consistently drifts the same way, check your stance first (feet position), then your bridge hand alignment.\n' +
