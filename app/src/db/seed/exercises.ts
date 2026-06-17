@@ -20,7 +20,7 @@ export const EXERCISES_SEED: NewExercise[] = [
     name: 'Line-Up Drill (15 Reds)',
     category: 'potting',
     description:
-      'Place all 15 reds in a single line across the table, each roughly a cue-width from one side rail, spaced so every ball has a clear pot to either the corner or centre pocket. Start from one end and pot each in turn, repositioning the cue ball by hand after each pot so the next red is always "on". Count how many you clear without a miss, then re-rack.',
+      'Place all 15 reds in a line down the centre of the table, evenly spaced from the baulk cushion to the top cushion. Each ball should have a clear pot to a corner or centre pocket. Start simple: pot any ball in any order, counting how many you clear without a miss. For a harder challenge, alternate red → colour (re-spotted each time) to practise position play between shots.',
     bestPracticeTips:
       '- Use the same cue ball speed and contact point on every pot — this is a consistency drill, not a power drill.\n' +
       '- Re-rack and repeat at least 3 times per session, noting your best run each time.\n' +
