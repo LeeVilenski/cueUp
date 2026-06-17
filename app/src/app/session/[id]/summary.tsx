@@ -178,11 +178,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: Spacing.two,
+    paddingVertical: Spacing.three,
     borderRadius: Radius.medium,
   },
   moodEmoji: {
     fontSize: 28,
+    lineHeight: 38,
   },
   notesInput: {
     minHeight: 80,
