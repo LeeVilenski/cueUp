@@ -334,12 +334,12 @@ export const EXERCISES_SEED: NewExercise[] = [
     name: 'Red-Black Combination',
     category: 'positional_play',
     description:
-      'Place the black on its spot and a red anywhere in the top half of the table. Pot the red into a corner pocket, aiming to bring the cue ball to the black spot (or within a cue-length of it) so the black is "on" for the next shot. Reset to a new red position each attempt. This is the single most-practiced unit of break-building and the foundation of every professional\'s potting game.',
+      'Place the black on its spot and a red anywhere in the top half of the table. Pot the red into a corner pocket, aiming to land the cue ball on the black for an easy pot — ideally just off straight so you have a natural angle onto the next red. Reset to a new red position each attempt. This is the single most-practiced unit of break-building and the foundation of every professional\'s potting game.',
     bestPracticeTips:
-      '- The natural angle off many red cuts already carries the cue ball toward the black spot — identify whether you need spin at all before defaulting to heavy side.\n' +
-      '- Running side spin (same direction as the pocket you\'re potting into) widens the cue ball angle; use it when the natural route leaves you short of the black spot.\n' +
+      '- The natural angle off many red cuts already carries the cue ball toward the black — identify whether you need spin at all before defaulting to heavy side.\n' +
+      '- Running side spin (same direction as the pocket you\'re potting into) widens the cue ball angle; use it when the natural route leaves you short of the black.\n' +
       '- If the natural angle is tight, try sending the cue ball off the top cushion to bounce down toward the black — practice this specific route until it feels reliable.\n' +
-      '- Award yourself a bonus point if the cue ball finishes within a cue-length of the black spot.',
+      '- You want to finish just off straight on the black — dead straight leaves you no angle for position on the next red.',
     difficulty: 'intermediate',
     suggestedDurationMins: 15,
     scoringType: 'score_out_of',

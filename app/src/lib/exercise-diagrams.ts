@@ -221,8 +221,7 @@ export const EXERCISE_DIAGRAMS: Record<string, DiagramSpec> = {
       { x: 0.9, y: 0.5, type: 'black' },
       { x: 0.62, y: 0.5, type: 'white' },
     ],
-    zones: [{ x: 0.9, y: 0.5, w: 0.12, h: 0.25, color: 'rgba(255,220,0,0.3)' }],
-    note: 'Pot the red into a corner pocket; bring the cue ball to the black spot area (yellow zone). Vary the red\'s position on each attempt.',
+    note: 'Pot the red into a corner pocket and land on the black — just off straight for an easy pot with a natural angle. Vary the red\'s position each attempt.',
   },
 
   'snooker-behind-baulk-colours': {
