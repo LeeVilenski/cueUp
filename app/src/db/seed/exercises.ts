@@ -170,14 +170,14 @@ export const EXERCISES_SEED: NewExercise[] = [
   }),
   exercise({
     slug: 'all-reds-safety-to-baulk',
-    name: 'All-Reds Safety to Baulk',
+    name: 'Last-Red Safety (Red to Baulk)',
     category: 'safety',
     description:
-      'Place a red anywhere above the baulk line (near a side cushion, near the top cushion, or in open space) and the cue ball anywhere in the top three-quarters of the table. Play a safety shot that brings the cue ball behind the baulk line — to rest between the baulk cushion and the line connecting yellow, green, and brown. A point is awarded only if the cue ball ends up fully behind the baulk line. Move the red to a new position for each attempt.',
+      'Simulate the final red on the table. Place a single red in the top half and the cue ball nearby. Your goal is to play the red down into baulk — ideally tight to the baulk cushion or nestled behind one of the baulk colours — while keeping the cue ball safe at the top of the table. This is the classic end-of-frame tactical exchange: sending the last red as far from the pockets as possible. Vary the starting positions each attempt.',
     bestPracticeTips:
-      '- A safety into baulk usually involves playing along the cushion or through the reds — visualise the cue ball\'s whole journey before you strike.\n' +
-      '- Practice from both sides of the table — nearly all club players have a noticeably weaker safety side.\n' +
-      '- The most common mistake is using too much pace; a softer shot that wobbles into baulk is better than a hard shot that bounces back out.',
+      '- Pace is everything — a thin contact at medium pace sends the red further than a thicker hit; experiment with different amounts of ball.\n' +
+      '- Try to leave the red tight on or near the baulk cushion, ideally behind one of the baulk colours so your opponent has no easy pot.\n' +
+      '- Think about where the cue ball finishes too — the best outcome is the red in baulk AND the cue ball at the opposite end of the table.',
     difficulty: 'intermediate',
     suggestedDurationMins: 15,
     scoringType: 'score_out_of',
@@ -346,5 +346,39 @@ export const EXERCISES_SEED: NewExercise[] = [
     scoringTarget: 10,
     scoringUnit: 'positions',
     sortOrder: 19,
+  }),
+  exercise({
+    slug: 'snooker-behind-baulk-colours',
+    name: 'Laying Snookers (Baulk Colours)',
+    category: 'safety',
+    description:
+      'Place the cue ball in the top half of the table and a single red near the baulk end. Your aim is to play a safety that leaves the cue ball hidden behind one of the three baulk colours (yellow, green, or brown) so your opponent cannot hit the red in a straight line. Before each shot, choose which baulk colour you intend to snooker behind, then judge whether you achieved it. Score a point only if the cue ball is fully hidden (a full snooker, not just a partial obstruction).',
+    bestPracticeTips:
+      '- Soft pace is usually better — it is much easier to judge where the cue ball will stop at slow speed.\n' +
+      '- Brown is the easiest colour to hide behind because it sits in the middle of the baulk line; start there before attempting yellow or green.\n' +
+      '- If you cannot get a full snooker, leaving the cue ball tight to the baulk colour is still excellent — even a partial obstruction forces a difficult shot.',
+    difficulty: 'intermediate',
+    suggestedDurationMins: 15,
+    scoringType: 'score_out_of',
+    scoringTarget: 10,
+    scoringUnit: 'snookers',
+    sortOrder: 20,
+  }),
+  exercise({
+    slug: 'snooker-behind-black-pink',
+    name: 'Laying Snookers (Black & Pink)',
+    category: 'safety',
+    description:
+      'Place the cue ball in the baulk half and a red near a side cushion in the top half of the table. Play a safety that brings the cue ball up the table and tucks it behind the black or the pink on their spots. These snookers are harder to lay because the cue ball must travel further, but they are extremely effective in match play — your opponent often cannot even see the red. Alternate between targeting the black and the pink. Score a point only for a full snooker.',
+    bestPracticeTips:
+      '- Use the natural angle off the cushion to guide the cue ball behind the colour — a cushion-first approach is often more controllable than a direct roll.\n' +
+      '- Getting the cue ball to stop in the right place is all about pace; once you find the right weight for one position, repeat it several times to lock in the feel.\n' +
+      '- In a match, even if the snooker isn\'t perfect, leaving the cue ball near the black or pink forces your opponent into a very long and difficult pot — that\'s still a win.',
+    difficulty: 'advanced',
+    suggestedDurationMins: 15,
+    scoringType: 'score_out_of',
+    scoringTarget: 10,
+    scoringUnit: 'snookers',
+    sortOrder: 21,
   }),
 ];

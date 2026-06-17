@@ -113,11 +113,14 @@ export const EXERCISE_DIAGRAMS: Record<string, DiagramSpec> = {
 
   'all-reds-safety-to-baulk': {
     balls: [
-      { x: 0.68, y: 0.12, type: 'red' },
-      { x: 0.18, y: 0.55, type: 'white' },
+      { x: 0.7, y: 0.35, type: 'red' },
+      { x: 0.6, y: 0.55, type: 'white' },
+      { x: 0.2, y: 0.3, type: 'green' },
+      { x: 0.2, y: 0.5, type: 'brown' },
+      { x: 0.2, y: 0.7, type: 'yellow' },
     ],
     zones: [{ x: 0.1, y: 0.5, w: 0.2, h: 0.95, color: 'rgba(64,200,240,0.2)' }],
-    note: 'Red near the top rail. Play a safety that brings the cue ball fully behind the baulk line (blue zone). Vary the red\'s position each attempt.',
+    note: 'Last-red scenario. Play the red down into the baulk zone (blue), ideally behind a baulk colour. Keep the cue ball safe at the top end.',
   },
 
   'cushion-first-drill': {
@@ -218,5 +221,26 @@ export const EXERCISE_DIAGRAMS: Record<string, DiagramSpec> = {
     ],
     zones: [{ x: 0.9, y: 0.5, w: 0.12, h: 0.25, color: 'rgba(255,220,0,0.3)' }],
     note: 'Pot the red into a corner pocket; bring the cue ball to the black spot area (yellow zone). Vary the red\'s position on each attempt.',
+  },
+
+  'snooker-behind-baulk-colours': {
+    balls: [
+      { x: 0.65, y: 0.4, type: 'white' },
+      { x: 0.15, y: 0.65, type: 'red' },
+      { x: 0.2, y: 0.3, type: 'green' },
+      { x: 0.2, y: 0.5, type: 'brown' },
+      { x: 0.2, y: 0.7, type: 'yellow' },
+    ],
+    note: 'Play a safety that hides the cue ball behind a baulk colour (yellow, green, or brown) so the red cannot be hit directly.',
+  },
+
+  'snooker-behind-black-pink': {
+    balls: [
+      { x: 0.25, y: 0.4, type: 'white' },
+      { x: 0.7, y: 0.2, type: 'red' },
+      { x: 0.75, y: 0.5, type: 'pink' },
+      { x: 0.9, y: 0.5, type: 'black' },
+    ],
+    note: 'Send the cue ball up the table and tuck it behind the pink or the black so your opponent cannot see the red.',
   },
 };
