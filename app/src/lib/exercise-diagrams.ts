@@ -3,16 +3,18 @@ import type { DiagramSpec } from '@/components/ui/table-diagram';
 export const EXERCISE_DIAGRAMS: Record<string, DiagramSpec> = {
   'line-up-15-reds': {
     balls: [
-      { x: 0.25, y: 0.12, type: 'red' },
-      { x: 0.35, y: 0.12, type: 'red' },
-      { x: 0.45, y: 0.12, type: 'red' },
-      { x: 0.55, y: 0.12, type: 'red' },
-      { x: 0.65, y: 0.12, type: 'red' },
-      { x: 0.75, y: 0.12, type: 'red' },
-      { x: 0.85, y: 0.12, type: 'red' },
-      { x: 0.15, y: 0.35, type: 'white' },
+      { x: 0.08, y: 0.5, type: 'red' },
+      { x: 0.19, y: 0.5, type: 'red' },
+      { x: 0.3, y: 0.5, type: 'red' },
+      { x: 0.41, y: 0.5, type: 'red' },
+      { x: 0.52, y: 0.5, type: 'red' },
+      { x: 0.63, y: 0.5, type: 'red' },
+      { x: 0.74, y: 0.5, type: 'red' },
+      { x: 0.85, y: 0.5, type: 'red' },
+      { x: 0.96, y: 0.5, type: 'red' },
+      { x: 0.08, y: 0.25, type: 'white' },
     ],
-    note: 'Reds evenly spaced along the top rail, each with a pot to a pocket. Position the cue ball by hand after each pot.',
+    note: 'All 15 reds in a line down the centre of the table, from baulk to top cushion. Pot into any pocket.',
   },
 
   'the-spider-safety-routine': {
