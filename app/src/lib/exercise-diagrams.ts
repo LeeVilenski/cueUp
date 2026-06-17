@@ -69,16 +69,18 @@ export const EXERCISE_DIAGRAMS: Record<string, DiagramSpec> = {
   'pairs-colours-break-building': {
     balls: [
       { x: 0.15, y: 0.5, type: 'white' },
-      { x: 0.35, y: 0.28, type: 'yellow' },
-      { x: 0.3, y: 0.38, type: 'red' },
+      { x: 0.2, y: 0.3, type: 'green' },
+      { x: 0.2, y: 0.5, type: 'brown' },
+      { x: 0.2, y: 0.7, type: 'yellow' },
       { x: 0.5, y: 0.5, type: 'blue' },
-      { x: 0.45, y: 0.38, type: 'red' },
       { x: 0.75, y: 0.5, type: 'pink' },
-      { x: 0.7, y: 0.65, type: 'red' },
-      { x: 0.88, y: 0.5, type: 'black' },
-      { x: 0.83, y: 0.38, type: 'red' },
+      { x: 0.9, y: 0.5, type: 'black' },
+      { x: 0.25, y: 0.35, type: 'red' },
+      { x: 0.45, y: 0.62, type: 'red' },
+      { x: 0.7, y: 0.32, type: 'red' },
+      { x: 0.85, y: 0.65, type: 'red' },
     ],
-    note: 'Reds paired with colours around the table. Pot red → colour → red → colour in sequence, always planning position two shots ahead.',
+    note: 'Colours on their spots, reds scattered near different colours. After each red, pot the colour nearest to where that red was — not always the black.',
   },
 
   'top-bottom-cushion-control': {

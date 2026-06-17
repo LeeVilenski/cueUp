@@ -122,10 +122,10 @@ export const EXERCISES_SEED: NewExercise[] = [
     name: 'Pairs/Colours Break-Building',
     category: 'break_building',
     description:
-      'Set up 4–6 reds each paired with a colour close to it, spread across the table. Build a break by alternating red→colour→red→colour, always selecting which colour to pot based on where you need the cue ball to go for the next red — not just the closest or highest-value option. The drill ends when you miss, go in-off, or run out of pairs.',
+      'Place all six colours on their spots and scatter 4–6 reds around the table, each one positioned near a different colour. The rule: after potting each red, you must pot the colour closest to where that red was — not whichever colour scores highest. Colours re-spot as normal. This forces you to navigate the full table and practise getting position on every colour, not just the black. The drill ends when you miss, go in-off, or run out of reds.',
     bestPracticeTips:
       '- Plan at least two shots ahead: the colour you are potting now should set up an angle on the next red.\n' +
-      '- If position on the ideal colour is poor, take the lower-value colour that gives you a better angle — a certain 40 is better than a risky 70.\n' +
+      '- Getting from one end of the table to the other between pairs is the real challenge — practise using the cushions to travel the cue ball.\n' +
       '- Try to beat your total score from the previous session; slow improvement is still improvement.',
     difficulty: 'advanced',
     suggestedDurationMins: 25,
