@@ -48,7 +48,7 @@ export const EXERCISE_DIAGRAMS: Record<string, DiagramSpec> = {
   'stun-and-screw-control-ladder': {
     balls: [
       { x: 0.5, y: 0.5, type: 'blue' },
-      { x: 0.22, y: 0.5, type: 'white' },
+      { x: 0.2, y: 0.3, type: 'white' },
     ],
     note: 'Pot the blue: first stun (stop dead), then screw back progressively further on each attempt. Move up one level only when you succeed three times.',
   },
