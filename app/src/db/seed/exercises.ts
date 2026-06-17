@@ -187,14 +187,14 @@ export const EXERCISES_SEED: NewExercise[] = [
   }),
   exercise({
     slug: 'cushion-first-drill',
-    name: 'Cushion-First Drill (Basic Banks)',
+    name: 'One-Cushion Escape Drill',
     category: 'potting',
     description:
-      'Set up a red anywhere on one side of the table and the cue ball on the other side, so a direct pot is not available. Play a bank shot — the cue ball must contact a side cushion before the red. Start with short, simple bank distances where the angle is obvious, and progressively work toward longer cushion-first shots. Repeat 10 times per session, varying the position each time.',
+      'Place a red on one side of the table and the cue ball on the other, with an obstacle ball blocking the direct path. Because you cannot pot or hit the red directly, you must play a one-cushion escape — sending the cue ball into a side cushion so it comes off at an angle to reach the red. Start with short, simple escapes where the angle is obvious, and progressively work toward longer cushion-first shots. Repeat 10 times per session, varying the positions each time.',
     bestPracticeTips:
       '- Fix your pace on a single angle before varying it — cushion-first shots are extremely sensitive to cue ball speed.\n' +
-      '- Use the table\'s diamond markers on the cushion rail as a starting reference point for working out where the cue ball will arrive after the bank.\n' +
-      '- Start close to the pocket and gradually increase the bank distance only once you\'re consistently converting the shorter version.',
+      '- Visualise the angle off the cushion by imagining a mirror: the cue ball leaves the rail at roughly the same angle it arrived.\n' +
+      '- Start with the obstacle close to the cue ball so the escape angle is gentle, and gradually increase the difficulty only once you\'re consistently finding the red.',
     difficulty: 'beginner',
     suggestedDurationMins: 15,
     scoringType: 'count_potted',

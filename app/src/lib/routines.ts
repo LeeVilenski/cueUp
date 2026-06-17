@@ -9,7 +9,7 @@ export const ROUTINES: Routine[] = [
   {
     id: 'potting-focus',
     name: '30-min Potting Focus',
-    description: 'Build potting consistency from short, medium and bank angles.',
+    description: 'Build potting consistency from short, medium and cushion-first angles.',
     exerciseIds: ['line-up-15-reds', 'long-pot-consistency-drill', 'cushion-first-drill'],
   },
   {

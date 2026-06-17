@@ -123,9 +123,10 @@ export const EXERCISE_DIAGRAMS: Record<string, DiagramSpec> = {
   'cushion-first-drill': {
     balls: [
       { x: 0.45, y: 0.38, type: 'red' },
+      { x: 0.32, y: 0.5, type: 'blue' },
       { x: 0.2, y: 0.65, type: 'white' },
     ],
-    note: 'White must hit the cushion before touching the red. Start with short bank distances and increase as confidence grows.',
+    note: 'The blue blocks the direct path to the red. Play a one-cushion escape — send the white into the side cushion to reach the red.',
   },
 
   'scatter-and-clear-15-reds': {
