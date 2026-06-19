@@ -15,7 +15,8 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.cueup.app"
+      "package": "com.cueup.app",
+      "permissions": []
     },
     "web": {
       "output": "static",
